@@ -50,7 +50,7 @@ public class Tablero
         // crear dinámicamente la tabla de casillas:
         casillas = new Casilla[ancho][alto];
         // establecer el diseño del panel de casillas como una rejilla de "ancho" x "alto"
-        lienzo.setLayout(new GridLayout(ancho, alto));
+        lienzo.setLayout(new GridLayout(alto,ancho));
         // recorrer el array para crear las casillas de su interior
         for (int x=0;x<ancho;x++)
         {
