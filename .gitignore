@@ -1,5 +1,9 @@
 *.class
 
+# Ignorar carpetas build y dist
+EncuentraBombas/build
+EncuentraBombas/dist
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
