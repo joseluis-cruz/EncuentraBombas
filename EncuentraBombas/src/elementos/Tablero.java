@@ -63,5 +63,8 @@ public class Tablero
                 casillas[x][y].getHueco().setVisible(true);
             }
         }
+        // forzar redibujado del panel contenedor principal
+        lienzo.validate();
+        lienzo.repaint();
     }
 }
