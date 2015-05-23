@@ -31,11 +31,11 @@ public class Casilla
         
         // establecemos el diseño del hueco como una rejilla de una celda
         hueco.setLayout(new GridLayout(1, 1));
-        // le agregamos el rótulo, pero lo ponemos invisible (de momento)
-        hueco.add(rotulo);
+        
+        // mantenemos el rótulo invisible, sin agregarlo al panel "hueco"
         rotulo.setVisible(false);
 
-        // también agregamos el botón al hueco base, pero esta vez visible
+        // sólo agregamos el botón al hueco base, por supuesto dejándolo visible
         hueco.add(boton);
         boton.setVisible(true);
         
