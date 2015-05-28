@@ -4,6 +4,8 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Gestiona cada casilla del tablero de juego.
@@ -38,6 +40,20 @@ public class Casilla
         // sólo agregamos el botón al hueco base, por supuesto dejándolo visible
         hueco.add(boton);
         boton.setVisible(true);
+        
+        // capturar el evento de la pulsación del botón
+        boton.addMouseListener (new MouseAdapter()
+        {
+            public void mouseClicked(MouseEvent evt)
+            {
+                hueco.remove(boton);
+                hueco.add(rotulo);
+                rotulo.setText("X");
+                rotulo.setVisible(true);
+                hueco.validate();
+                hueco.repaint();                        
+            }
+        });
         
     }
     
