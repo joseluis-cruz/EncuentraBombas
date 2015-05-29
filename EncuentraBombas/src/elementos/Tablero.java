@@ -64,15 +64,25 @@ public class Tablero
                 casillas[x][y].getHueco().setVisible(true);
             }
         }
+        inicializaJuego();
+        
+        // forzar redibujado del panel contenedor principal
+        lienzo.validate();
+        lienzo.repaint();
+    }
+
+    /**
+     * Método que inicializa el tablero de juego.
+     * Limpia todas las caaillas, genera las bombas e informa a las casillas vecinas.
+     */
+    private void inicializaJuego ()
+    {
         // vamos aquí a inicializar el contenido del tablero
-        for (int x=0;x<ancho;x++)
-        {
-            for (int y=0;y<alto;y++)
-            {
+        for (int x = 0; x < this.ancho; x++) {
+            for (int y = 0; y < this.alto; y++) {
                 casillas[x][y].limpia();
             }
         }
-        
         Random rnd = new Random();
         for (int i=1;i<=this.numero_bombas;i++)
         {
@@ -87,7 +97,7 @@ public class Tablero
             } while (casillas[columna][fila].esBomba());
             // colocar la bomba en la coordenada calculada aleatoriamente
             casillas[columna][fila].colocaBomba();
-            // informar a las celdas vecinas
+            // informar a las casillas vecinas
             for (int x=-1;x<=1;x++)
             {
                 for (int y=-1;y<=1;y++)
@@ -97,10 +107,6 @@ public class Tablero
             }
             
         }
-        
-        // forzar redibujado del panel contenedor principal
-        lienzo.validate();
-        lienzo.repaint();
     }
     
     private void notificaBombaVecina(int columna, int fila)
