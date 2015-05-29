@@ -48,27 +48,35 @@ public class Tablero
         // valores iniciales para el resto de propiedades privadas
         this.bombas_marcadas = 0;
         this.estado_juego = 0;
-        // crear dinámicamente la tabla de casillas:
-        casillas = new Casilla[ancho][alto];
-        // establecer el diseño del panel de casillas como una rejilla de "ancho" x "alto"
-        lienzo.setLayout(new GridLayout(alto,ancho));
-        // recorrer el array para crear las casillas de su interior
-        for (int y=0;y<alto;y++)
-        {
-            for (int x=0;x<ancho;x++)
-            {
-                // crear la casilla
-                casillas[x][y] = new Casilla();
-                // agregarla al panel "lienzo" y ponerla visible
-                lienzo.add(casillas[x][y].getHueco());
-                casillas[x][y].getHueco().setVisible(true);
-            }
-        }
+        
+        creaJuego();
+        
         inicializaJuego();
         
         // forzar redibujado del panel contenedor principal
         lienzo.validate();
         lienzo.repaint();
+    }
+
+    /**
+     * Crea dinámicamente los objetos necesarios para la gestión del juego 
+     */
+    private void creaJuego()
+    {
+        // crear dinámicamente la tabla de casillas:
+        casillas = new Casilla[this.ancho][this.alto];
+        // establecer el diseño del panel de casillas como una rejilla de "ancho" x "alto"
+        this.lienzo.setLayout(new GridLayout(this.alto,this.ancho));
+        // recorrer el array para crear las casillas de su interior
+        for (int y = 0; y<this.alto; y++) {
+            for (int x = 0; x<this.ancho; x++) {
+                // crear la casilla
+                casillas[x][y] = new Casilla();
+                // agregarla al panel "lienzo" y ponerla visible
+                this.lienzo.add(casillas[x][y].getHueco());
+                casillas[x][y].getHueco().setVisible(true);
+            }
+        }
     }
 
     /**
