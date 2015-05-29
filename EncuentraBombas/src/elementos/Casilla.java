@@ -16,6 +16,10 @@ import java.awt.event.MouseEvent;
  */
 public class Casilla
 {
+    private int contenido; // Lo que contiene la casilla, que puede ser:
+    // 0: la casilla está vacía, no cotiene nada ni es colidante con una bomba
+    // 1-8: la casilla contiene ese número, porque es colidante con ese nº de bombas
+    // 9: el contenido de la casilla es una bomba
     // Elementos visuales que componen la casilla:
     private JPanel hueco;  // Panel base que sirve de contenedor al resto
     private JLabel rotulo; // Puede ser un número o bien la letra "B" (bomba aparecida) o "X" marca de bomba puesta por el jugador
@@ -35,7 +39,7 @@ public class Casilla
         hueco.setLayout(new GridLayout(1, 1));
         
         // mantenemos el rótulo invisible, sin agregarlo al panel "hueco"
-        rotulo.setVisible(false);
+        rotulo.setVisible(true);
 
         // sólo agregamos el botón al hueco base, por supuesto dejándolo visible
         hueco.add(boton);
@@ -48,13 +52,11 @@ public class Casilla
             {
                 hueco.remove(boton);
                 hueco.add(rotulo);
-                rotulo.setText("X");
                 rotulo.setVisible(true);
                 hueco.validate();
                 hueco.repaint();                        
             }
-        });
-        
+        });        
     }
     
     /**
@@ -66,4 +68,51 @@ public class Casilla
         return this.hueco;
     }
     
+    private void setContenido(int nuevocontenido)
+    {
+        contenido = nuevocontenido;
+        if (contenido==0)
+            rotulo.setText("");
+        else if (contenido==9)
+            rotulo.setText("B");
+        else if ((contenido>0) && (contenido<9))
+            rotulo.setText(Integer.toString(contenido));
+    }
+    
+    /**
+     * Limpia el contendido de la casilla, para que no contenga nada.
+     */
+    public void limpia()
+    {
+        setContenido(0);
+    }
+   
+    /**
+     * Indica a la casilla de que debe alojar una bomba en su interior.
+     */
+    public void colocaBomba()
+    {
+        setContenido(9);
+    }
+    
+    /**
+     * Sirve para notificar a la casilla de que posee una nueva bomba vecina.
+     * 
+     * De forma que se incrementará su contador interno de bombas vecinas.
+     * 
+     */
+    public void tienesBombaVecina()
+    {
+        if (contenido<8)
+            setContenido(contenido+1);
+    }
+    
+    /**
+     * Informa de si la casilla contiene una bomba
+     * @return true cuando la casilla es una bomba o false en cualquier otro caso
+     */
+    public boolean esBomba()
+    {
+        return (contenido==9);
+    }
 }
